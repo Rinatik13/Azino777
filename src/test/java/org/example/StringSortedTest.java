@@ -1,5 +1,6 @@
 package org.example;
 
+import org.example.logic.StringSorted;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
