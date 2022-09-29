@@ -1,4 +1,4 @@
-package org.example;
+package org.example.logic;
 
 import org.example.logic.StringSorted;
 import org.junit.Test;
