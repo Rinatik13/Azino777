@@ -1,11 +1,15 @@
 package org.example.logic;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class AnalizText {
 
     Map<Character, Integer> map = new HashMap<>();
+    private List<String> kiker = new ArrayList<>();
+    private List<Integer> kikers = new ArrayList<>();
 
     public int analiz(String text) {
         StringSorted stringSorted = new StringSorted();
@@ -69,10 +73,10 @@ public class AnalizText {
             c = String.valueOf(listText[2].charAt(0));
             d = String.valueOf(listText[3].charAt(0));
             f = String.valueOf(listText[4].charAt(0));
-            if (a.equals(b)&&a.equals(c)&&a.equals(d)){
+            if (a.equals(b) && a.equals(c) && a.equals(d)){
                 result = 7;
             }
-            else if (b.equals(c)&&b.equals(d)&&d.equals(f)){
+            else if (b.equals(c) && b.equals(d) && d.equals(f)){
                 result = 7;
             }
 
@@ -90,9 +94,19 @@ public class AnalizText {
             f = String.valueOf(listText[4].charAt(0));
 
             if (a.equals(b) && a.equals(c) && d.equals(f)){
+                kiker.add(a);
+                kiker.add(b);
+                kiker.add(c);
+                kiker.add(d);
+                kiker.add(f);
                 result = 6;
             }
             else if (a.equals(b)&&c.equals(d)&&c.equals(f)){
+                kiker.add(a);
+                kiker.add(b);
+                kiker.add(c);
+                kiker.add(d);
+                kiker.add(f);
                 result = 6;
             }
 
@@ -109,12 +123,17 @@ public class AnalizText {
             d = String.valueOf(listText[3].charAt(1));
             f = String.valueOf(listText[4].charAt(1));
             if (a.equals(b)&&a.equals(c)&&a.equals(d)&&a.equals(f)){
+                kiker.add(a);
+                kiker.add(b);
+                kiker.add(c);
+                kiker.add(d);
+                kiker.add(f);
                 result = 5;
             }
 
         }
 
-        // проверяем соответствию стриту
+        // проверяем соответствию стрит
         if (result==0){
             int a,b,c,d,f;
 
@@ -141,11 +160,17 @@ public class AnalizText {
             f = String.valueOf(listText[4].charAt(0));
 
             if (a.equals(b) && a.equals(c)) {
+                kiker.add(d);
+                kiker.add(f);
                 result = 3;
             } else if (b.equals(c)&&b.equals(d)){
+                kiker.add(a);
+                kiker.add(f);
                 result = 3;
             }
             else if(c.equals(d)&&c.equals(f)){
+                kiker.add(a);
+                kiker.add(b);
                 result = 3;
             }
 
@@ -162,12 +187,15 @@ public class AnalizText {
             f = String.valueOf(listText[4].charAt(0));
 
             if (a.equals(b) && c.equals(d)){
+                kiker.add(f);
                 result = 2;
             }
             else if(b.equals(c) && d.equals(f)){
+                kiker.add(a);
                 result = 2;
             }
-            else if (a.equals(b)&&d.equals(f)){
+            else if (a.equals(b) && d.equals(f)){
+                kiker.add(c);
                 result = 2;
             }
 
@@ -183,16 +211,48 @@ public class AnalizText {
             d = String.valueOf(listText[3].charAt(0));
             f = String.valueOf(listText[4].charAt(0));
 
-            if (a.equals(b) || b.equals(c) || c.equals(d) || d.equals(f)){
+            if (a.equals(b)){
+                kiker.add(c);
+                kiker.add(d);
+                kiker.add(f);
                 result = 1;
             }
+            else if(b.equals(c)) {
+                kiker.add(a);
+                kiker.add(d);
+                kiker.add(f);
+                result = 1;
+            }
+            else if (c.equals(d)){
+                kiker.add(a);
+                kiker.add(b);
+                kiker.add(f);
+                result = 1;
+            }
+            else if (d.equals(f)) {
+                kiker.add(a);
+                kiker.add(b);
+                kiker.add(c);
+                result = 1;
+                }
+            }
+        if (result==0){
+            String a, b, c, d, f;
 
+            a = String.valueOf(listText[0].charAt(0));
+            b = String.valueOf(listText[1].charAt(0));
+            c = String.valueOf(listText[2].charAt(0));
+            d = String.valueOf(listText[3].charAt(0));
+            f = String.valueOf(listText[4].charAt(0));
+            kiker.add(a);
+            kiker.add(b);
+            kiker.add(c);
+            kiker.add(d);
+            kiker.add(f);
         }
-
-//        if (result==0) {
-//            result = String.valueOf(listText[0].charAt(0));
-//        }
-
+        for (String string : kiker){
+            kikers.add(map.get(string.charAt(0)));
+        }
         return result;
     }
 
@@ -201,7 +261,6 @@ public class AnalizText {
         text = stringSorted.startSorted(text);
         createMap();
         String[] listText = text.split(" ");
-        int result = 0;
         int a,b,c,d,f;
         a = map.get(listText[0].charAt(0));
         b = map.get(listText[1].charAt(0));
@@ -226,5 +285,13 @@ public class AnalizText {
         this.map.put('Q',11);
         this.map.put('K',12);
         this.map.put('A',13);
+    }
+
+    public List<String> getKiker() {
+        return this.kiker;
+    }
+
+    public List<Integer> getKikers() {
+        return kikers;
     }
 }
