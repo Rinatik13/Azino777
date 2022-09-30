@@ -74,6 +74,6 @@ public class PokerHand implements Comparable<PokerHand>{
         AnalizText analizText = new AnalizText();
         return "\nPokerHand{" +
                 "text='" + text + '\'' +
-                '}' + "Ruka: " + analizText.analiz(text) + ",Kiker: " + kiker.toString();
+                '}' + "Ruka: ";
     }
 }
