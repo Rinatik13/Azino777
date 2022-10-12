@@ -14,7 +14,8 @@ public class PokerHand implements Comparable<PokerHand>{
     }
 
     public PokerHand(String text) {
-        if (ValidationText.validRegex(text)){
+        ValidationText validationText = new ValidationText();
+        if (validationText.validRegex(text)){
             AnalizText analizText = new AnalizText();
             int i = analizText.analiz(text);
             this.kiker = analizText.getKikers();
