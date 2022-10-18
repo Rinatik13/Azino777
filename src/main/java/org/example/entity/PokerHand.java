@@ -1,5 +1,6 @@
 package org.example.entity;
 
+import org.example.enums.Combination;
 import org.example.logic.AnalizText;
 import org.example.validation.ValidationText;
 
@@ -7,6 +8,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class PokerHand implements Comparable<PokerHand>{
+
+    Combination combination;
     String text;
     List<Integer> kiker = new ArrayList<>();
 
