@@ -1,65 +1,77 @@
 package org.example.logic;
 
+import org.example.enums.Card;
+import org.example.enums.Suit;
+
 import java.util.HashMap;
 import java.util.Map;
 
 public class StringSorted {
-    Map<Character, Integer> map = new HashMap<>();
-    public String startSorted(String text){
-        createMap();
-        String result = "";
-        String[] textMap = text.split(" ");
+    Card[] cards = new Card[5];
 
-        for (int y = 0; y < textMap.length-1; y++){
-            for (int i = y; i < textMap.length-1; i++) {
-                char charA = textMap[i].charAt(0);
-                char charB = textMap[i + 1].charAt(0);
-                int a = map.get(charA);
-                int b = map.get(charB);
-                if (a < b) {
-                    String to = textMap[i];
-                    textMap[i] = textMap[i + 1];
-                    textMap[i + 1] = to;
-                }
-            }
-            for (int i = textMap.length-1; i > 0; i--) {
-                char charA = textMap[i].charAt(0);
-                char charB = textMap[i - 1].charAt(0);
-                int a = map.get(charA);
-                int b = map.get(charB);
-                if (a > b) {
-                    String to = textMap[i];
-                    textMap[i] = textMap[i - 1];
-                    textMap[i - 1] = to;
-                }
-            }
-        }
-        for (int i = 0; i<textMap.length; i++){
-            result += textMap[i];
-            if (i == textMap.length-1){
-                break;
-            }
-            else {
-                result+= " ";
-            }
-        }
-        return result;
+    Map<Character, Integer> map = new HashMap<>();
+    public Card[] getSortedCards(String text){
+        separationCard(text);
+        comparisonCart();
+        return cards;
     }
 
+    public void createCard(){
+        Card[] cards = new Card[5];
+        cards[0] = Card.ACE;
+        System.out.println(cards[0]);
+    }
 
-    public void createMap (){
-        this.map.put('2',1);
-        this.map.put('3',2);
-        this.map.put('4',3);
-        this.map.put('5',4);
-        this.map.put('6',5);
-        this.map.put('7',6);
-        this.map.put('8',7);
-        this.map.put('9',8);
-        this.map.put('T',9);
-        this.map.put('J',10);
-        this.map.put('Q',11);
-        this.map.put('K',12);
-        this.map.put('A',13);
+    public void separationCard(String text){
+        String[] arrayCard = text.split(" ");
+        for(int i = 0; i<cards.length; i++){
+            cards[i] = getCard(arrayCard[i].charAt(0),arrayCard[i].charAt(1));
+        }
+    }
+
+    public void comparisonCart(){
+        int step = 0;
+        while (step<5){
+            for (int i = 0; i<4; i++){
+                if (cards[i].getCardStrength()<cards[i+1].getCardStrength()){
+                    Card card = cards[i];
+                    cards[i]=cards[i+1];
+                    cards[i+1] = card;
+                }
+            }
+            step++;
+        }
+
+    }
+
+    public Card getCard (char charText, char charTextSuit){
+        Card cardResult = switch (charText) {
+            case ('A') -> Card.ACE;
+            case ('K') -> Card.KING;
+            case ('Q') -> Card.QUEEN;
+            case ('J') -> Card.JACK;
+            case ('T') -> Card.TEN;
+            case ('9') -> Card.NINE;
+            case ('8') -> Card.EIGHT;
+            case ('7') -> Card.SEVEN;
+            case ('6') -> Card.SEX;
+            case ('5') -> Card.FIVE;
+            case ('4') -> Card.FOUR;
+            case ('3') -> Card.THREE;
+            case ('2') -> Card.TWO;
+            default -> null;
+        };
+        cardResult.setSuit(getSuit(charTextSuit));
+        return cardResult;
+    }
+// проблема с сортировкой одинаковых карт с разнымы мастями.
+    public Suit getSuit(char charTextSuit){
+        return switch (charTextSuit) {
+            case ('S') -> Suit.SPADES;
+            case ('H') -> Suit.HEART;
+            case ('D') -> Suit.DIAMON;
+            case ('C') -> Suit.CLUB;
+            default -> null;
+        };
     }
 }

@@ -1,6 +1,5 @@
 package org.example.logic;
 
-import org.example.logic.StringSorted;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
@@ -13,34 +12,34 @@ public class StringSortedTest extends StringSorted {
 
     @Test
     public void testStart() {
-        startSorted(text);
+        getSortedCards(text);
     }
 
     @Test
     public void testReturn(){
         String result = null;
-        result = startSorted(text);
+        result = getSortedCards(text);
         assertNotEquals(null,result);
     }
 
     @Test
     public void testSorted(){
         String exResult = "AS JH TC 3S 2D";
-        String result = startSorted(text);
+        String result = getSortedCards(text);
         assertEquals(exResult,result);
     }
 
     @Test
     public void testSorted2(){
         String exResult = "AH KS KH TD 2C";
-        String result = startSorted(text2);
+        String result = getSortedCards(text2);
         assertEquals(exResult,result);
     }
 
     @Test
     public void testSorted3(){
         String exResult = "AH AD JC TS 7D";
-        String result = startSorted(text3);
+        String result = getSortedCards(text3);
         assertEquals(exResult,result);
     }
 

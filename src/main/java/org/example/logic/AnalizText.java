@@ -13,7 +13,7 @@ public class AnalizText {
 
     public int analiz(String text) {
         StringSorted stringSorted = new StringSorted();
-        text = stringSorted.startSorted(text);
+//        text = stringSorted.getSortedCards(text);
         createMap();
         int result = 0;
 
@@ -258,7 +258,7 @@ public class AnalizText {
 
     public int analizCart(String text){
         StringSorted stringSorted = new StringSorted();
-        text = stringSorted.startSorted(text);
+//        text = stringSorted.getSortedCards(text);
         createMap();
         String[] listText = text.split(" ");
         int a,b,c,d,f;
